@@ -10,7 +10,7 @@ import os
 #encoder_filepath = os.path.join(models_dir, 'one_hot_encoder.pkl')
                           
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "cowpea_disease", "cowpea-project"))
-models_dir = os.path.join(base_dir, "models")
+models_dir = os.path.join(base_dir, "helpers")
 model_filepath = os.path.join(models_dir, "disease_predictor_model.joblib")
 encoder_filepath = os.path.join(models_dir, "one_hot_encoder.pkl")
 print("Model Filepath:", model_filepath)
