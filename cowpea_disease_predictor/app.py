@@ -3,10 +3,22 @@ import numpy as np
 import joblib
 import streamlit as st
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+import os
+
+#models_dir = os.path.join(os.path.dirname(__file__),'models')
+#model_filepath = os.path.join(models_dir, 'disease_predictor_model.joblib')
+#encoder_filepath = os.path.join(models_dir, 'one_hot_encoder.pkl')
+                          
+base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "cowpea_disease", "cowpea-project"))
+models_dir = os.path.join(base_dir, "models")
+model_filepath = os.path.join(models_dir, "disease_predictor_model.joblib")
+encoder_filepath = os.path.join(models_dir, "one_hot_encoder.pkl")
+print("Model Filepath:", model_filepath)
+print("Encoder Filepath:", encoder_filepath)
 
 # File paths for the pre-trained model and encoder
-model_filepath = "\helpers\disease_predictor_model.joblib"
-encoder_filepath = "\helpers\one_hot_encoder.pkl"
+#model_filepath = "D:\\cowpea_project\\disease_project\\cowpea_disease\\cowpea-project\\models\\disease_predictor_model.joblib"
+#encoder_filepath = "D:\\cowpea_project\\disease_project\\cowpea_disease\\cowpea-project\\models\\one_hot_encoder.pkl"
 
 # Function to preprocess data and make predictions
 def preprocess_data(user_data, model_file, encoder_file=None):
@@ -25,14 +37,17 @@ def preprocess_data(user_data, model_file, encoder_file=None):
         encoder = joblib.load(encoder_file)
         encoder.fit(pd.DataFrame({'Sample': ['A', 'B', 'C', 'D', 'E']}))  # Define all possible categories
         joblib.dump(encoder, encoder_file)
+        print("try")
         encoded_samples = encoder.transform(user_df[['Sample']])
         sample_encoded_cols = encoder.get_feature_names_out(['Sample'])
         encoded_sample_df = pd.DataFrame(encoded_samples, columns=sample_encoded_cols, index=user_df.index)
-    except (FileNotFoundError, TypeError):
+        
+    except FileNotFoundError:
         # Fit and save the encoder if not already saved
         encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
         encoder.fit(pd.DataFrame({'Sample': ['A', 'B', 'C', 'D', 'E']}))  # Define all possible categories
         joblib.dump(encoder, encoder_file)
+        print("except")
         encoded_samples = encoder.transform(user_df[['Sample']])
         sample_encoded_cols = encoder.get_feature_names_out(['Sample'])
         encoded_sample_df = pd.DataFrame(encoded_samples, columns=sample_encoded_cols, index=user_df.index)
