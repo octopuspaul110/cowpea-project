@@ -33,10 +33,11 @@ def preprocess_data(user_data, model_file, encoder_file=None):
 
     # One-Hot Encoding for Sample column
     try:
+        encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
         # Load pre-fitted encoder
-        encoder = joblib.load(encoder_file)
+        #encoder = joblib.load(encoder_file)
         encoder.fit(pd.DataFrame({'Sample': ['A', 'B', 'C', 'D', 'E']}))  # Define all possible categories
-        joblib.dump(encoder, encoder_file)
+        #joblib.dump(encoder, encoder_file)
         print("try")
         encoded_samples = encoder.transform(user_df[['Sample']])
         sample_encoded_cols = encoder.get_feature_names_out(['Sample'])
