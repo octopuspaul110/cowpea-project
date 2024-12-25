@@ -5,8 +5,8 @@ import streamlit as st
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 # File paths for the pre-trained model and encoder
-model_filepath = "D:\cowpea_project\disease_project\cowpea_disease\cowpea-project\helpers\disease_predictor_model.joblib"
-encoder_filepath = "D:\cowpea_project\disease_project\cowpea_disease\cowpea-project\helpers\one_hot_encoder.pkl"
+model_filepath = "\helpers\disease_predictor_model.joblib"
+encoder_filepath = "\helpers\one_hot_encoder.pkl"
 
 # Function to preprocess data and make predictions
 def preprocess_data(user_data, model_file, encoder_file=None):
