@@ -20,6 +20,15 @@ print("Encoder Filepath:", encoder_filepath)
 model_filepath = "./cowpea-project/helpers/disease_predictor_model.joblib"
 #encoder_filepath = "D:\\cowpea_project\\disease_project\\cowpea_disease\\cowpea-project\\models\\one_hot_encoder.pkl"
 
+dir = path.Path(__file__).abspath()
+sys.path.append(dir.parent.parent)
+
+# load model
+path_to_model = './helpers/disease_predictor_model.joblib'
+
+with open(path_to_model, 'rb') as file:
+    model = joblib.load(model_file)
+
 # Function to preprocess data and make predictions
 def preprocess_data(user_data, model_file, encoder_file=None):
     # Convert user data to DataFrame
@@ -62,7 +71,7 @@ def preprocess_data(user_data, model_file, encoder_file=None):
     user_df[numeric_cols] = scaler.fit_transform(user_df[numeric_cols])
 
     # Load Pre-trained Model
-    model = joblib.load(model_file)
+    #model = joblib.load(model_file)
 
     # Perform Inference
     predictions = model.predict(user_df)
