@@ -29,7 +29,7 @@ sys.path.append(dir.parent.parent)
 path_to_model = './helpers/disease_predictor_model.joblib'
 
 with open(path_to_model, 'rb') as file:
-    model = joblib.load(model_file)
+    model = joblib.load(file)
 
 # Function to preprocess data and make predictions
 def preprocess_data(user_data, model_file, encoder_file=None):
