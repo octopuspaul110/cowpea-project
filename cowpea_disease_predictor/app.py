@@ -21,7 +21,7 @@ print("Encoder Filepath:", encoder_filepath)
 model_filepath = "./cowpea-project/helpers/disease_predictor_model.joblib"
 #encoder_filepath = "D:\\cowpea_project\\disease_project\\cowpea_disease\\cowpea-project\\models\\one_hot_encoder.pkl"
 
-dir = path.Path(__file__).abspath()
+dir = path.Path(__file__)
 sys.path.append(dir.parent.parent)
 
 # load model
