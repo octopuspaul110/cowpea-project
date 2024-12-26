@@ -17,7 +17,7 @@ print("Model Filepath:", model_filepath)
 print("Encoder Filepath:", encoder_filepath)
 
 # File paths for the pre-trained model and encoder
-#model_filepath = "D:\\cowpea_project\\disease_project\\cowpea_disease\\cowpea-project\\models\\disease_predictor_model.joblib"
+model_filepath = "\\cowpea-project\\helpers\\disease_predictor_model.joblib"
 #encoder_filepath = "D:\\cowpea_project\\disease_project\\cowpea_disease\\cowpea-project\\models\\one_hot_encoder.pkl"
 
 # Function to preprocess data and make predictions
