@@ -83,7 +83,7 @@ def preprocess_data(user_data, model_file, encoder_file=None):
 
 # Streamlit App
 def main():
-    st.title("Agricultural Disease Predictor")
+    st.title("Cowpea Disease Predictor")
     image_path = "./app/cowpea_disease.jpeg"  # Replace with the actual path to your image
     try:
         image = Image.open(image_path)
