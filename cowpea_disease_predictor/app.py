@@ -84,7 +84,13 @@ def preprocess_data(user_data, model_file, encoder_file=None):
 # Streamlit App
 def main():
     st.title("Agricultural Disease Predictor")
-    st.write("Enter the values to predict the disease status.")
+    image_path = "./app/cowpea_disease.jpeg"  # Replace with the actual path to your image
+    try:
+        image = Image.open(image_path)
+        st.image(image, use_container_width=True)
+    except FileNotFoundError:
+        st.error("Image file not found. Please ensure the file path is correct.")
+        st.write("Enter the values to predict the disease status.")
 
     # User Input for fields
     Rep = st.number_input("Rep", min_value=1, max_value=100, value=1)
