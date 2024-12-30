@@ -95,14 +95,14 @@ def main():
 
     # User Input for fields
     Rep = st.number_input("Rep", min_value=1, max_value=100, value=1)
-    PH2 = st.number_input("PH2", min_value=0.0, max_value=10.0, value=5.8)
-    PH4 = st.number_input("PH4", min_value=0.0, max_value=10.0, value=6.0)
-    PH6 = st.number_input("PH6", min_value=0.0, max_value=10.0, value=6.3)
-    PH8 = st.number_input("PH8", min_value=0.0, max_value=10.0, value=6.5)
-    NLB2 = st.number_input("NLB2", min_value=0, max_value=100, value=12)
-    NLB4 = st.number_input("NLB4", min_value=0, max_value=100, value=15)
-    NLB6 = st.number_input("NLB6", min_value=0, max_value=100, value=18)
-    NLB8 = st.number_input("NLB8", min_value=0, max_value=100, value=20)
+    PH2 = st.number_input("PH2", min_value=0.0, max_value=10000.0, value=5.8)
+    PH4 = st.number_input("PH4", min_value=0.0, max_value=10000.0, value=6.0)
+    PH6 = st.number_input("PH6", min_value=0.0, max_value=10000.0, value=6.3)
+    PH8 = st.number_input("PH8", min_value=0.0, max_value=10000.0, value=6.5)
+    NLB2 = st.number_input("NLB2", min_value=0, max_value=100000, value=12)
+    NLB4 = st.number_input("NLB4", min_value=0, max_value=100000, value=15)
+    NLB6 = st.number_input("NLB6", min_value=0, max_value=100000, value=18)
+    NLB8 = st.number_input("NLB8", min_value=0, max_value=100000, value=20)
     Sample = st.selectbox("Sample", options=['A', 'B', 'C', 'D', 'E'])
 
     # Create user data dictionary
