@@ -6,8 +6,44 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 import os
 import path
 import sys
+import sqlite3
+from sqlalchemy import create_engine,text
 from PIL import Image
 
+# Initialize database connection
+DB_FILE = "app_data.db"
+engine = create_engine(f"sqlite:///{DB_FILE}")
+
+def initialize_db():
+    with engine.connect() as conn:
+        conn.execute(text("""
+        CREATE TABLE IF NOT EXISTS predictions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            REP INTEGER,
+            PH2 REAL,
+            PH4 REAL,
+            PH6 REAL,
+            PH8 REAL,
+            NLB2 INTEGER,
+            NLB4 INTEGER,
+            NLB6 INTEGER,
+            NLB8 INTEGER,
+            SAMPLE TEXT,
+        );
+        """))
+# Save data to database
+def save_to_db(data):
+    with engine.connect() as conn:
+        data.to_sql("predictions", con=conn, if_exists="append", index=False)
+
+# Fetch all data from database
+def fetch_all_data():
+    with engine.connect() as conn:
+        query = "SELECT * FROM predictions"
+        return pd.read_sql(query, conn)
+
+# Initialize database
+initialize_db()
 #models_dir = os.path.join(os.path.dirname(__file__),'models')
 #model_filepath = os.path.join(models_dir, 'disease_predictor_model.joblib')
 #encoder_filepath = os.path.join(models_dir, 'one_hot_encoder.pkl')
@@ -121,8 +157,21 @@ def main():
 
     if st.button("Predict"):
         # Get the prediction
-        prediction = preprocess_data(user_data, model_filepath, encoder_filepath)
-        st.write(f"The predicted disease status is: {prediction}")
+      try:
+          prediction = preprocess_data(user_data, model_filepath, encoder_filepath)
+          st.write(f"The predicted disease status is: {prediction}")
+          user_data["SEEDKGHA"] = prediction
+          save_to_db(input_data)
+          st.success("Prediction saved to database!")
+      except Exception as e:
+            st.error(f"Error during inference: {e}")
+    # Display stored predictions
+    st.header("Stored Predictions")
+    stored_data = fetch_all_data()
+    if not stored_data.empty:
+        st.dataframe(stored_data)
+    else:
+        st.info("No data stored yet.")      
 
 if __name__ == "__main__":
     main()
