@@ -28,7 +28,7 @@ def initialize_db():
             NLB4 INTEGER,
             NLB6 INTEGER,
             NLB8 INTEGER,
-            Sample STRING,
+            Sample STRING
         );
         """))
 # Save data to database
