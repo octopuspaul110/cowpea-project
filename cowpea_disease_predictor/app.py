@@ -29,7 +29,7 @@ def initialize_db():
             NLB6 INTEGER,
             NLB8 INTEGER,
             Sample STRING,
-            Severity INTEGER,
+            Severity INTEGER
         );
         """))
 # Save data to database
