@@ -172,9 +172,9 @@ def main():
         # Get the prediction
       try:
           prediction = preprocess_data(user_data, model_filepath, encoder_filepath)
-          st.write(f"The predicted mosaic virus disease sevserity(on a scale of 1 to 5) is: {prediction}")
+          st.write(f"The predicted mosaic virus disease severity(on a scale of 1 to 5) is: {prediction}")
           user_data_for_db["Severity"] = prediction
-          save_to_db(user_data)
+          save_to_db(user_data_for_db)
           st.success("Prediction saved to database!")
       except Exception as e:
             st.error(f"Error during inference: {e}")
