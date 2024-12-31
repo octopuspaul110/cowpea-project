@@ -174,6 +174,7 @@ def main():
           prediction = preprocess_data(user_data, model_filepath, encoder_filepath)
           st.write(f"The predicted mosaic virus disease severity(on a scale of 1 to 5) is: {prediction}")
           user_data_for_db["Severity"] = prediction
+          print(user_data_for_db.head())
           save_to_db(user_data_for_db)
           st.success("Prediction saved to database!")
       except Exception as e:
