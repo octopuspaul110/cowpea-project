@@ -161,7 +161,7 @@ def main():
           prediction = preprocess_data(user_data, model_filepath, encoder_filepath)
           st.write(f"The predicted disease status is: {prediction}")
           user_data["SEEDKGHA"] = prediction
-          save_to_db(input_data)
+          save_to_db(user_data)
           st.success("Prediction saved to database!")
       except Exception as e:
             st.error(f"Error during inference: {e}")
