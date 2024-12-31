@@ -28,7 +28,8 @@ def initialize_db():
             NLB4 INTEGER,
             NLB6 INTEGER,
             NLB8 INTEGER,
-            Sample STRING
+            Sample STRING,
+            Severity INTEGER,
         );
         """))
 # Save data to database
@@ -154,13 +155,25 @@ def main():
         'NLB8': [NLB8],
         'Sample': [Sample]
     }
+    user_data_for_db = pd.DataFrame({
+        'Rep': [Rep],
+        'PH2': [PH2],
+        'PH4': [PH4],
+        'PH6': [PH6],
+        'PH8': [PH8],
+        'NLB2': [NLB2],
+        'NLB4': [NLB4],
+        'NLB6': [NLB6],
+        'NLB8': [NLB8],
+        'Sample': [Sample]
+    })
 
     if st.button("Predict"):
         # Get the prediction
       try:
           prediction = preprocess_data(user_data, model_filepath, encoder_filepath)
-          st.write(f"The predicted disease status is: {prediction}")
-          user_data["SEEDKGHA"] = prediction
+          st.write(f"The predicted mosaic virus disease sevserity(on a scale of 1 to 5) is: {prediction}")
+          user_data_for_db["Severity"] = prediction
           save_to_db(user_data)
           st.success("Prediction saved to database!")
       except Exception as e:
